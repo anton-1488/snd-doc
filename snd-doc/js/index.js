@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-loadPage("https://anton-1488.github.io/snd-doc/docs/index.html");
+loadPage("snd-doc/docs/index.html");
 
 function addCopyButtons() {
         const codeExamples = document.querySelectorAll('.code-example');
