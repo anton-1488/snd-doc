@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Player Example</title>
+</head>
+<body>
+
+<header>
+    <h1>Воспроизведения звуков через TrackPlayer</h1>
+
+    <section>
+        <p>
+            TrackPlayer предоставляет удобный API для взаимодействия с устройствами вывода.
+            С его помощью можно легко воспроизводить любые песни и звуки.
+        </p>
+
+        <p>
+            Ниже показан пример работы с этим классом для восроизведения звука.
+        </p>
+    </section>
+</header>
+
+<main>
+    <div class="code-example">
+        <div class="code-header">
+            <div class="code-title">Воспроизведение трека</div>
+            <button class="copy-btn">
+                <span class="copy-icon"></span>
+                Копировать
+            </button>
+        </div>
+        <pre>
+                <code class="language-java">
+try (AudioEngine engine = new NativeAudioEngine()) {
+    Track track = engine.loadTrack("sound.aiff"); // Загружаем трек
+
+    TrackPlayer player = engine.getTrackPlayer(track); // получаем плеер
+    player.play(); // Вопроизводим
+
+    Thread.sleep(track.getDuration()); // ждем окончания
+    player.close();
+} catch(AudioEngineException ex) {
+    log.error("AD error: ", ex);
+}
+                </code>
+            </pre>
+    </div>
+
+    <section>
+        <h2>Пояснения</h2>
+        <p>
+            Первым шагом необхоимо инициализировать движок. При инициализации, движок загрузит нативные библиотеки,
+            и соберет загрузчиков треков. А так же прогреет всю систему.
+        </p>
+        <p>
+            Далее загружаем трек. Движок сам найдет необходимый загрузчик, но вы можете заргрузить трек напрямую, через
+            специальные классы-loader'ы.
+        </p>
+        <h3>Создаем плеер</h3>
+        <p>
+            Есть 2 способа создать плеер:
+        </p>
+        <ul>
+            <li>1. Через класс <strong>AudioEngine(метод getTrackPlayer(Track track))</strong></li>
+            <li>2. Вручную, через <strong>new NativeTrackPlayer();</strong></li>
+        </ul>
+        <p>
+            Разница в том, что в большинстве случаев вы будете использовать стандартное устройсто вывода,
+            а так как конструктор плеера требует в себя выходное AudioDeviceInfo, то движок сам созаст экземпляр с
+            использованием стандартного устройства вывода.
+        </p>
+        <p>
+            В конце мы ждем завершения воспроизведения, после которого следовало было бы закрыть плеер.
+        </p>
+
+        <p>
+            Это не все возмоности плеера, а лишь ознакомление с его API. Для подробного изучения TrackPlayer, и его
+            реализации(NativeTrackPlayer), рекоменуем прочитать статью про них.
+        </p>
+
+        <div class="note-container">
+            <div class="note">
+                <p>
+                    TrackPlayer расширяет AutoClosable, так что его можно было бы поместить в
+                    <strong>try-with-resources</strong>, и не думать о ручном close();
+                </p>
+            </div>
+            <div class="tip">
+                <p>
+                    Например, в UI приложениях можно было бы обойтись без Thread.sleep для ожидания завершения трека.
+                    Во всяком случае, можно будет использовать слушатели прогресса воспроизведения, предоставляемые
+                    классом
+                    TrackPlayer.
+                </p>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+
+</footer>
+
+</body>
+</html>

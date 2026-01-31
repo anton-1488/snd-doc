@@ -1,0 +1,224 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    height: 100vh;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+}
+
+.sidebar {
+    min-width: 250px;
+    background: #1e1e1e;
+    color: #fff;
+    overflow-y: auto;
+    padding: 20px;
+}
+
+.sidebar h2 {
+    margin-top: 0;
+}
+
+.sidebar details {
+    margin-bottom: 0px;
+    cursor: pointer;
+}
+
+.subtitle {
+    color: #2ECC12;
+    font-family: "Rubik";
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+.menu-link {
+    display: block;
+    width: 100%;
+    padding: 7px;
+    color: #25AA0F;
+    text-decoration: none;
+}
+details li {
+    padding: 1px;
+}
+
+.details-label {
+    line-height: 0;
+    color: #7f7f7f;
+    font-family: "Helvetica";
+    padding: 0;
+    margin: 10px;
+    margin-top: 20px;
+    margin-left: 25px;
+}
+
+.sidebar details summary:hover, .menu-link:hover {
+    background-color: #2e2e2e;
+    border-radius: 7px;
+}
+
+.sidebar summary {
+    outline: none;
+    font-size: 1.2em;
+    padding: 7px;
+    margin: 0;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0px;
+    margin: 2px 0 2px 20px;
+}
+
+.sidebar a:hover {
+    text-decoration: underline;
+}
+
+details details {
+    margin-left: 20px;
+}
+
+.content {
+    flex-grow: 1;
+    padding: 30px;
+    overflow-y: auto;
+    background: #f5f5f5;
+}
+
+.content section {
+    margin-bottom: 50px;
+}
+
+/* Стили для подсветки кода */
+.token.keyword { color: #CC7832; }      /* class, public, void */
+.token.string { color: #6A8759; }       /* "текст" */
+.token.comment { color: #808080; }      /* // комментарий */
+.token.function { color: #FFC66D; }     /* имена методов */
+.token.class-name { color: #4EADE5; }   /* имена классов */
+.token.annotation { color: #BBB529; }   /* @NotNull, @Override */
+.token.number { color: #6897BB; }       /* числа */
+.token.operator { color: #A9B7C6; }     /* = + - */
+
+/* Контейнер для кода */
+.code-example {
+    background: #1e1e1e;
+    border-radius: 8px;
+    margin: 0;
+    overflow: hidden;
+    border-left: 4px solid #2ECC12;
+    font-size: 13px;
+}
+
+.code-example pre {
+    margin: 0;
+    padding: 16px;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    font-size: 10px;
+    line-height: 1.4;
+    overflow-x: auto;
+}
+
+code {
+    margin: 0;
+    padding: 0;
+}
+
+pre[class*="language-"] {
+    margin: 0 !important;
+    padding: 10px !important;
+    font-size: 13px;
+    overflow-x: auto;
+}
+
+/* Заголовок блока кода */
+.code-title {
+    background: #252526;
+    color: #2ECC12;
+    padding: 8px 16px;
+    font-family: 'Consolas', monospace;
+    font-size: 12px;
+    border-bottom: 1px solid #3e3e42;
+}
+
+
+/* Кнопка копирования */
+.copy-btn {
+    background: #2ECC12;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 4px 12px;
+    font-size: 11px;
+    font-family: 'Consolas', monospace;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.1s;
+}
+
+.copy-btn:hover {
+    background: #25AA0F;
+}
+
+.copy-btn:active {
+    transform: scale(0.95);
+}
+
+.copy-btn.copied {
+    background: #1e1e1e;
+    border: 1px solid #2ECC12;
+}
+
+/* Иконка копирования */
+.copy-icon {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin-right: 4px;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>');
+    background-size: contain;
+    vertical-align: middle;
+}
+.code-header {
+    background: #252526;
+    padding-right: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+h1 {
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+.note-container {
+    display: flex;
+    justify-items: space-between;
+}
+
+.note {
+    background-color: lightgray;
+    width: 40%;
+    padding: 10px;
+    border-radius: 15px;
+    border: yellow solid 2px;
+    margin: 10px;
+}
+.tip {
+    background-color: lightgray;
+    width: 40%;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 15px;
+    border: #25AA0F solid 2px;
+}
+
+@media(max-width: 768px) {
+    .sidebar {
+        display: none;
+    }
+}

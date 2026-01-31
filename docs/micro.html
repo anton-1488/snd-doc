@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Microphone Example</title>
+</head>
+<body>
+
+<header>
+  <h1>Запись аудио через Microphone</h1>
+
+  <section>
+    <p>
+      Microphone абстрагиурет устройтсво входа, и дает возможность записать звук с микрофона.
+    </p>
+
+    <p>
+      Ниже показан пример работы с этим классом для записи аудио.
+    </p>
+  </section>
+</header>
+
+<main>
+  <div class="code-example">
+    <div class="code-header">
+      <div class="code-title">Запись звука</div>
+      <button class="copy-btn">
+        <span class="copy-icon"></span>
+        Копировать
+      </button>
+    </div>
+    <pre>
+                <code class="language-java">
+try (AudioEngine engine = new NativeAudioEngine();
+     Microphone mic = Microphone.open(WavTrackFormatFactory().wav16bitMono44kHz())) {
+
+    microphone.start(); // начинаем запись
+    Thread.sleep(10000); // условно, ждем сколько надо.
+    Track track = microphone.getTrack(); // получаем результат, и делаем что надо.
+
+    engine.exportTrack(track, new FileOutputStream("recorded.wav")); // например сохраняем в файл
+} catch(AudioEngineException ex) {
+    log.error("AD error: ", ex);
+}
+                </code>
+            </pre>
+  </div>
+
+  <section>
+    <h2>Пояснения</h2>
+    <p>
+      Первым шагом необхоимо инициализировать движок. При инициализации, движок загрузит нативные библиотеки,
+      и соберет загрузчиков треков. А так же прогреет всю систему.
+    </p>
+    <p>
+      Затем инициализируем аудио устройтсово с указаным форматом, в который сразу запишеться аудио.
+    </p>
+    <p>
+      Далее начинаем запись. Microphone создаст для записи отдельный поток, поэтому нужно будет ждать сколько надо, пока не запишеться нужное количество данных.
+    </p>
+    <p>
+      И, накнец получаем результат записи. Это остановит поток записи микрофона.
+    </p>
+    <p>
+      Затем можно сохранить записанный звук, или оспроизвести в плеере.
+    </p>
+    <h3>Работа с Microphone</h3>
+    <p>
+      У него есть 2 метода создания(open(...))
+    </p>
+    <ul>
+      <li>1. open(TrackFormat format) - открывает устройство входа по умолчанию с указаным форматом.</li>
+      <li>2. open(TrackFormat format, AudioDeviceInfo info) - открывает указанное устройство входа с указаным форматом.</strong></li>
+    </ul>
+    <p>
+      Ну, то есть различие лишь в том, какое устройтсво использовать для записи.
+    </p>
+    <br/>
+
+    <p>
+      Для базаовой работы с захватом звука, это более чем достаточно. Для более продвинутой работы рекомендуем изучить класс Microphone более детально.
+      А так же можно рассмотреть возможноть записи прямо с NativeInputAuioDevice(Не забывайте что есть еще и Duplex, который скоро появиться:)).
+    </p>
+
+    <div class="note-container">
+      <div class="note">
+        <p>
+          TrackPlayer расширяет AutoClosable, так что его можно было бы поместить в
+          <strong>try-with-resources</strong>, и не думать о ручном close();
+        </p>
+      </div>
+      <div class="tip">
+        <p>
+          Например, в UI приложениях можно было бы обойтись без Thread.sleep для ожидания завершения трека.
+          Во всяком случае, можно будет использовать слушатели прогресса воспроизведения, предоставляемые
+          классом
+          TrackPlayer.
+        </p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+
+</footer>
+
+</body>
+</html>
